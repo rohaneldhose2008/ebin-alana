@@ -424,16 +424,14 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         done = true;
         canvas.style.opacity = '0';
         const tip = document.getElementById('scratch-tip');
-        if (tip) tip.innerHTML = '🎉 Save the Date — 5 July 2026!';
+        if (tip) tip.innerHTML = '🎉 Mark Your Calendar — 5 July 2026!';
         celebrate();
 
-        // Smoothly scroll to the Groom & Bride details section after a short delay
-        setTimeout(function () {
-          const storySection = document.getElementById('s-story');
-          if (storySection) {
-            storySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 1800);
+        // Reveal the "Add to Calendar" dropdown button
+        const calWrap = document.getElementById('calendar-btn-wrap');
+        if (calWrap) {
+          calWrap.style.display = 'inline-block';
+        }
       }
     }
 
@@ -444,6 +442,46 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     canvas.addEventListener('touchstart', function (e) { e.preventDefault(); isDown = true; scratch(getXY(e)); }, { passive: false });
     canvas.addEventListener('touchmove',  function (e) { e.preventDefault(); if (isDown) scratch(getXY(e)); }, { passive: false });
     canvas.addEventListener('touchend',   function ()  { isDown = false; });
+
+    // Dropdown options click and toggle logic
+    const triggerBtn = document.getElementById('calendar-trigger-btn');
+    const dropdown = document.getElementById('calendar-dropdown');
+    if (triggerBtn && dropdown) {
+      triggerBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('show');
+      });
+    }
+
+    const icsLink = document.getElementById('ics-download-link');
+    if (icsLink) {
+      icsLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        const icsContent = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'BEGIN:VEVENT',
+          'URL:https://rohaneldhose2008.github.io/ebin-alana/',
+          'DTSTART:20260705T083000Z',
+          'DTEND:20260705T153000Z',
+          'SUMMARY:Ebin & Alana\'s Wedding',
+          'DESCRIPTION:You are cordially invited to celebrate the wedding of Ebin Reji & Alana Kuriakose.',
+          'LOCATION:St. Athanasious Jacobite Syrian Cathedral\\, Puthenkurish\\, Kerala',
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ].join('\n');
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', 'ebin_alana_wedding.ics');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
 
     setTimeout(resize, 100);
   }
