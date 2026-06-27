@@ -136,11 +136,9 @@ body {
 }
 .left-door {
   left: 0;
-  border-right: 1px solid rgba(212,168,67,0.35);
 }
 .right-door {
   right: 0;
-  border-left: 1px solid rgba(212,168,67,0.35);
 }
 .cover-door-bg {
   position: absolute;
