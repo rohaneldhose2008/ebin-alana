@@ -145,7 +145,7 @@ body {
   top: 0;
   height: 100%;
   width: 200%;
-  background: url('images/hero.jpeg?v=2') center center / cover no-repeat;
+  background: url('images/HERO.jpeg?v=2') center center / cover no-repeat;
 }
 .cover-door-bg::before {
   content: '';
