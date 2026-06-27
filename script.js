@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   FRANKLIN & SARAH — 3D SCROLL INVITATION — script.js
+   EBIN & ALANA — 3D SCROLL INVITATION — script.js
    ═══════════════════════════════════════════════════════ */
 
 /* ── Always start from top on every load / reload ── */
@@ -12,7 +12,7 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   'use strict';
 
   /* ── CONFIG ── */
-  const WEDDING = new Date('2026-12-28T10:00:00+05:30');
+  const WEDDING = new Date('2026-07-05T14:00:00+05:30');
 
   /* ── ELEMENTS ── */
   const cover      = document.getElementById('cover');
@@ -30,12 +30,40 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
      ══════════════════════════════════════════════════ */
   function openCover() {
     try {
-      // Animate seal
-      const sealBody = sealBtn ? sealBtn.querySelector('.seal-body') : null;
-      if (sealBody) {
-        sealBody.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-        sealBody.style.transform  = 'scale(0) rotate(30deg)';
-        sealBody.style.opacity    = '0';
+      // First make the hero page layout visible (opacity: 0 will keep it visually hidden but DOM dimensions are set)
+      if (page) page.classList.add('visible');
+
+      // Get initial position of cover's heart button
+      const firstRect = sealBtn.getBoundingClientRect();
+
+      // Get target position of hero page's heart slot
+      const targetSlot = document.getElementById('hero-heart-slot');
+      const lastRect = targetSlot ? targetSlot.getBoundingClientRect() : null;
+
+      if (lastRect) {
+        // Calculate offsets and scale
+        const dx = (lastRect.left + lastRect.width / 2) - (firstRect.left + firstRect.width / 2);
+        const dy = (lastRect.top + lastRect.height / 2) - (firstRect.top + firstRect.height / 2);
+        const scale = lastRect.width / firstRect.width;
+
+        // Animate heart: fade out glow & text, stop hover animations, and fly/rotate to target
+        const sealContent = sealBtn.querySelector('.seal-content');
+        if (sealContent) {
+          sealContent.style.transition = 'opacity 0.25s ease';
+          sealContent.style.opacity = '0';
+        }
+        const sealGlow = sealBtn.querySelector('.seal-glow');
+        if (sealGlow) {
+          sealGlow.style.transition = 'opacity 0.25s ease';
+          sealGlow.style.opacity = '0';
+        }
+        const sealBody = sealBtn.querySelector('.seal-body');
+        if (sealBody) {
+          sealBody.style.animation = 'none';
+        }
+
+        sealBtn.style.transition = 'transform 1.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.4s ease';
+        sealBtn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ') rotate(360deg)';
       }
 
       // Start playing audio immediately (silently) to comply with browser/iOS audio user-interaction requirements
@@ -65,6 +93,38 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       if (cover) cover.classList.add('exit');
     }, 350);
 
+    /* ── REDIRECTION TIMER (AUTO-SCROLL INACTIVITY) ── */
+    let autoScrollTimer = null;
+    let userHasInteracted = false;
+
+    function initAutoScroll() {
+      // Start 10s timer to scroll to He & She section
+      autoScrollTimer = setTimeout(function () {
+        if (!userHasInteracted) {
+          const storySection = document.getElementById('s-story');
+          if (storySection) {
+            storySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 10000);
+
+      // Clear timer on user scroll/wheel/touch interaction
+      function cancelTimer() {
+        userHasInteracted = true;
+        if (autoScrollTimer) {
+          clearTimeout(autoScrollTimer);
+          autoScrollTimer = null;
+        }
+        window.removeEventListener('scroll', cancelTimer);
+        window.removeEventListener('wheel', cancelTimer);
+        window.removeEventListener('touchmove', cancelTimer);
+      }
+
+      window.addEventListener('scroll', cancelTimer, { passive: true });
+      window.addEventListener('wheel', cancelTimer, { passive: true });
+      window.addEventListener('touchmove', cancelTimer, { passive: true });
+    }
+
     setTimeout(function () {
       if (cover) cover.style.display = 'none';
       if (page) page.classList.add('visible');
@@ -72,10 +132,21 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         musicPill.classList.remove('hidden');
         musicPill.classList.add('visible');
       }
+      const instaFloat = document.getElementById('insta-float');
+      if (instaFloat) {
+        instaFloat.classList.add('visible');
+      }
+      const fixedLogo = document.getElementById('fixed-logo');
+      if (fixedLogo) {
+        fixedLogo.classList.add('visible');
+      }
 
-      // Rings fly in
-      const ringsWrap = page ? page.querySelector('.rings-svg') : null;
-      if (ringsWrap) ringsWrap.parentElement.classList.add('rings-open');
+      // Show target slot's static heart on flight completion
+      const targetSlot = document.getElementById('hero-heart-slot');
+      const staticHeart = targetSlot ? targetSlot.querySelector('.static-heart') : null;
+      if (staticHeart) {
+        staticHeart.style.opacity = '1';
+      }
 
       // Trigger hero elements
       if (page) {
@@ -87,6 +158,9 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
       // Start observer
       startObserver();
+
+      // Start auto-scroll redirection timer
+      initAutoScroll();
 
       // Countdown
       updateCountdown();
@@ -322,8 +396,8 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       // Label
       sc.save();
       sc.textAlign = 'center';
-      sc.fillStyle = 'rgba(255,255,255,0.72)'; // bright cream/white on gold
-      sc.font = '600 10.5px Raleway, sans-serif';
+      sc.fillStyle = 'rgba(255,255,255,0.92)'; // bright cream/white on gold
+      sc.font = '600 18px Raleway, sans-serif';
       sc.fillText('✦   SCRATCH TO REVEAL   ✦', canvas.width / 2, canvas.height / 2 + 22);
       sc.restore();
     }
@@ -350,7 +424,7 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         done = true;
         canvas.style.opacity = '0';
         const tip = document.getElementById('scratch-tip');
-        if (tip) tip.innerHTML = '🎉 Save the Date — 28 December 2026!';
+        if (tip) tip.innerHTML = '🎉 Save the Date — 5 July 2026!';
         celebrate();
 
         // Smoothly scroll to the Groom & Bride details section after a short delay
@@ -546,244 +620,7 @@ window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     });
   });
 
-  /* ══════════════════════════════════════════════════
-     13. RSVP SECTION
-     ══════════════════════════════════════════════════ */
-  (function initRSVP() {
-    // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL HERE:
-    var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzS27Zu-L8ugLGM-HUxgmmZLN3bt_NSQZ4ATvMx--NRpIPWbb27uOAQMgalLaC-2lyc/exec";
 
-    var form         = document.getElementById('rsvp-form');
-    var nameInput    = document.getElementById('rsvp-name');
-    var phoneInput   = document.getElementById('rsvp-phone');
-    var msgInput     = document.getElementById('rsvp-msg');
-    var submitBtn    = document.getElementById('rsvp-submit');
-    var attendYes    = document.getElementById('attend-yes');
-    var attendNo     = document.getElementById('attend-no');
-    var eventsWrap   = document.getElementById('rsvp-events-wrap');
-    var errorEl      = document.getElementById('rsvp-error');
-    var selectAllBtn = document.getElementById('rsvp-select-all');
-    var checkboxes   = form.querySelectorAll('input[name="events"]');
-
-    // Reject popup
-    var rejectPopup  = document.getElementById('rsvp-popup');
-    var rejectClose  = document.getElementById('rsvp-popup-close');
-    var rejectName   = document.getElementById('rsvp-popup-name');
-
-    // Accept popup
-    var acceptPopup  = document.getElementById('rsvp-accept-popup');
-    var acceptClose  = document.getElementById('rsvp-accept-close');
-    var acceptName   = document.getElementById('rsvp-accept-name');
-
-    if (!form) return;
-
-    /* ── Select All toggle logic ── */
-    function updateSelectAllText() {
-      if (!checkboxes || checkboxes.length === 0) return;
-      var allChecked = Array.prototype.slice.call(checkboxes).every(function (cb) {
-        return cb.checked;
-      });
-      if (selectAllBtn) {
-        selectAllBtn.textContent = allChecked ? 'Deselect All' : 'Select All';
-      }
-    }
-
-    if (selectAllBtn) {
-      selectAllBtn.addEventListener('click', function () {
-        var allChecked = Array.prototype.slice.call(checkboxes).every(function (cb) {
-          return cb.checked;
-        });
-        checkboxes.forEach(function (cb) {
-          cb.checked = !allChecked;
-        });
-        updateSelectAllText();
-      });
-      checkboxes.forEach(function (cb) {
-        cb.addEventListener('change', updateSelectAllText);
-      });
-    }
-
-    /* ── Show/hide events grid based on attendance choice ── */
-    function handleAttendanceChange() {
-      if (attendYes.checked) {
-        eventsWrap.classList.add('open');
-      } else {
-        eventsWrap.classList.remove('open');
-      }
-    }
-
-    attendYes.addEventListener('change', handleAttendanceChange);
-    attendNo.addEventListener('change', handleAttendanceChange);
-
-    /* ── Open / close popups ── */
-    function openPopup(el) {
-      el.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closePopup(el) {
-      el.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    rejectClose.addEventListener('click', function () { closePopup(rejectPopup); });
-    acceptClose.addEventListener('click', function () { closePopup(acceptPopup); });
-
-    // Close on backdrop click
-    rejectPopup.addEventListener('click', function (e) { if (e.target === rejectPopup) closePopup(rejectPopup); });
-    acceptPopup.addEventListener('click', function (e) { if (e.target === acceptPopup) closePopup(acceptPopup); });
-
-    // Close on Escape
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        closePopup(rejectPopup);
-        closePopup(acceptPopup);
-      }
-    });
-
-    /* ── Form submit ── */
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      errorEl.textContent = '';
-
-      var name = nameInput.value.trim();
-      var phone = phoneInput ? phoneInput.value.trim() : '';
-      var message = msgInput ? msgInput.value.trim() : '';
-      var attending = document.querySelector('input[name="attending"]:checked');
-
-      // Validation
-      if (!name) {
-        errorEl.textContent = '✦ Please enter your name to continue.';
-        nameInput.focus();
-        nameInput.style.borderColor = '#d63e72';
-        return;
-      }
-      nameInput.style.borderColor = '';
-
-      if (!attending) {
-        errorEl.textContent = '✦ Please let us know if you will be attending.';
-        return;
-      }
-
-      var isAttending = attending.value === 'yes';
-      var checkedEvents = [];
-
-      if (isAttending) {
-        var eventCheckboxes = form.querySelectorAll('input[name="events"]:checked');
-        if (eventCheckboxes.length === 0) {
-          errorEl.textContent = '✦ Please select at least one event you will attend.';
-          return;
-        }
-        eventCheckboxes.forEach(function (cb) {
-          checkedEvents.push(cb.value);
-        });
-      }
-
-      // Show loading state
-      var originalBtnText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Saving RSVP... 💌';
-      submitBtn.style.opacity = '0.7';
-
-      var payload = {
-        name: name,
-        phone: phone,
-        attending: attending.value,
-        events: checkedEvents,
-        message: message
-      };
-
-      // Clean up interface and display popup
-      function handlePostSubmit() {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.style.opacity = '';
-
-        if (isAttending) {
-          acceptName.textContent = '— ' + name + ' —';
-          openPopup(acceptPopup);
-          celebrate();
-        } else {
-          rejectName.textContent = '— ' + name + ' —';
-          openPopup(rejectPopup);
-          spawnRejectHearts();
-        }
-
-        form.reset();
-        eventsWrap.classList.remove('open');
-        updateSelectAllText();
-      }
-
-      if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== 'YOUR_APP_SCRIPT_URL_HERE') {
-        var submitted = false;
-        // 5s timeout fallback
-        var timeoutId = setTimeout(function () {
-          if (!submitted) {
-            submitted = true;
-            console.warn('RSVP sheet submission timed out. Proceeding optimistically.');
-            handlePostSubmit();
-          }
-        }, 5000);
-
-        fetch(GOOGLE_SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-        .then(function () {
-          if (!submitted) {
-            submitted = true;
-            clearTimeout(timeoutId);
-            handlePostSubmit();
-          }
-        })
-        .catch(function (err) {
-          console.error('Error submitting RSVP:', err);
-          if (!submitted) {
-            submitted = true;
-            clearTimeout(timeoutId);
-            handlePostSubmit();
-          }
-        });
-      } else {
-        console.log('Google Sheet URL not configured yet. Payload:', payload);
-        setTimeout(handlePostSubmit, 800);
-      }
-    });
-
-
-    /* ── Broken hearts on decline ── */
-    function spawnRejectHearts() {
-      var symbols = ['💔', '🥺', '😢', '✉️'];
-      for (var i = 0; i < 12; i++) {
-        (function (idx) {
-          setTimeout(function () {
-            var el = document.createElement('div');
-            el.textContent = symbols[idx % symbols.length];
-            el.style.cssText = [
-              'position:fixed', 'pointer-events:none', 'z-index:9999',
-              'font-size:' + (18 + Math.random() * 16) + 'px',
-              'left:' + (20 + Math.random() * 60) + 'vw',
-              'top:60vh',
-              'transition:all 2s cubic-bezier(0.1,0.8,0.3,1)',
-              'opacity:1'
-            ].join(';');
-            document.body.appendChild(el);
-            requestAnimationFrame(function () {
-              requestAnimationFrame(function () {
-                el.style.left    = (10 + Math.random() * 80) + 'vw';
-                el.style.top     = (15 + Math.random() * 50) + 'vh';
-                el.style.opacity = '0';
-                el.style.transform = 'scale(0.3) rotate(' + (Math.random() * 60 - 30) + 'deg)';
-              });
-            });
-            setTimeout(function () { el.remove(); }, 2200);
-          }, idx * 120);
-        })(i);
-      }
-    }
-
-  })(); // end initRSVP
 
 })();
 

@@ -5,11 +5,11 @@
   <!-- Force scroll to top on every load before render -->
   <script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Franklin & Sarah — 28 December 2026</title>
-  <meta name="description" content="Wedding invitation of Franklin Sabu & Sarah Chandy. 28th December 2026, Kerala, India.">
-  <meta property="og:title" content="💍 Franklin & Sarah — 28 December 2026">
+  <title>Ebin & Alana — 5 July 2026</title>
+  <meta name="description" content="Wedding invitation of Ebin Reji & Alana Kuriakose. 5th July 2026, Kerala, India.">
+  <meta property="og:title" content="💍 Ebin & Alana — 5 July 2026">
   <meta property="og:description" content="You are cordially invited. Tap to experience our wedding invitation.">
-  <meta property="og:image" content="https://nexoracreation.github.io/Franklin-Sarah/images/couple.jpeg">
+  <meta property="og:image" content="https://nexoracreation.github.io/Franklin-Sarah/images/couple.jpeg?v=2">
   <meta property="og:url" content="https://nexoracreation.github.io/Franklin-Sarah/">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,29 @@
 </head>
 <body>
 
+  <!-- Global SVG Defs -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <radialGradient id="heartGrad" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#ea4c62"></stop>
+        <stop offset="55%" stop-color="#b91a38"></stop>
+        <stop offset="100%" stop-color="#800a20"></stop>
+      </radialGradient>
+    </defs>
+  </svg>
+
   <!-- ░░ PETALS CANVAS ░░ -->
   <canvas id="petal-canvas"></canvas>
+
+  <!-- Fixed Company Logo (Visible after cover opens) -->
+  <a id="fixed-logo" class="hidden-logo" href="https://www.instagram.com/double_layer_photography?igsh=MW40ajdoZ2ptNmF5&utm_source=qr" target="_blank" rel="noopener" aria-label="Company Logo">
+    <img src="images/logo.png?v=2" alt="Company Logo">
+  </a>
+
+  <!-- Floating Instagram Icon -->
+  <a id="insta-float" href="https://www.instagram.com/double_layer_photography?igsh=MW40ajdoZ2ptNmF5&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+  </a>
 
   <!-- ░░ MUSIC ░░ -->
   <div id="music-pill" class="hidden">
@@ -36,36 +57,27 @@
        COVER SCREEN
        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
   <div id="cover">
-    <div class="cover-layer c-l1"></div>
-    <div class="cover-layer c-l2"></div>
-    <div class="cover-layer c-l3"></div>
-    <div class="cover-center">
-      <div class="cover-ornament top">— ✦ —</div>
-      <p class="cover-eyebrow">The Wedding Invitation</p>
-      <div class="cover-img-wrap" style="width: 100%; margin: 8px 0 16px; border-radius: 6px; overflow: hidden; border: 1px solid var(--bdr-g); box-shadow: 0 4px 15px rgba(163, 128, 59, 0.08);">
-        <img class="cover-hero-img" style="width: 100%; height: auto; display: block;" src="images/HERO.jpeg" alt="Franklin &amp; Sarah">
-      </div>
+    <!-- Split doors -->
+    <div class="cover-door left-door">
+      <div class="cover-door-bg"></div>
+    </div>
+    <div class="cover-door right-door">
+      <div class="cover-door-bg"></div>
+    </div>
+
+    <!-- Welcome Center Piece -->
+    <div class="cover-content">
+      <div class="c-title">Ebin &amp; Alana</div>
       <div class="seal-wrap" id="seal-btn">
         <div class="seal-glow"></div>
-        <div class="seal-ring r1"></div>
-        <div class="seal-ring r2"></div>
-        <div class="seal-body" style="background: none !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; width: 85px; height: 76.5px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 5; filter: drop-shadow(0 6px 14px rgba(163,128,59,0.32));">
+        <div class="seal-body" style="background: none !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; width: 100px; height: 90px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 5; filter: drop-shadow(0 6px 14px rgba(185,26,56,0.32));">
           <svg class="seal-heart-bg" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;" viewBox="0 0 100 90">
-            <defs>
-              <radialGradient id="heartGrad" cx="35%" cy="35%" r="65%">
-                <stop offset="0%" stop-color="var(--pink-l)"></stop>
-                <stop offset="55%" stop-color="var(--pink)"></stop>
-                <stop offset="100%" stop-color="var(--pink-d)"></stop>
-              </radialGradient>
-            </defs>
             <path d="M50,15 C50,15 40,0 20,0 C8,0 0,10 0,23 C0,42.5 25,69 50,83 C75,69 100,42.5 100,23 C100,10 92,0 80,0 C60,0 50,15 50,15 Z" fill="url(#heartGrad)"></path>
             <path d="M50,19 C50,19 41.5,5 23.5,5 C12.7,5 5.5,13.5 5.5,24.5 C5.5,41 28,65 50,77.5 C72,65 94.5,41 94.5,24.5 C94.5,13.5 87.3,5 76.5,5 C58.5,5 50,19 50,19 Z" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="3,3"></path>
           </svg>
-          <div class="seal-content" style="position: relative; z-index: 6; font-family: var(--f-serif); font-size: 0.9rem; color: #fff; letter-spacing: 0.08em; font-weight: 400; transform: translateY(-2px); white-space: nowrap;">F 💍 S</div>
+          <div class="seal-content" style="position: relative; z-index: 6; font-family: var(--f-sans); font-size: 0.85rem; color: #fff; letter-spacing: 0.15em; font-weight: 600; text-transform: uppercase; transform: translateY(-2px); white-space: nowrap;">Open</div>
         </div>
       </div>
-      <p class="cover-cta">Tap to open your invitation</p>
-      <div class="cover-ornament bottom">— ✦ —</div>
     </div>
   </div>
 
@@ -80,34 +92,28 @@
       <div class="hero-layer hl-mid"   data-parallax="0.18"></div>
       <div class="hero-layer hl-front" data-parallax="0.06">
         <div class="hero-frame">
-          <span class="h-eyebrow fade3d">— Save The Date —</span>
-          <h1 class="h-names fade3d" data-delay="0.1">Franklin <em>&</em> Sarah</h1>
-          <div class="h-rings-wrap fade3d" data-delay="0.22">
-            <svg class="rings-svg" viewBox="0 0 300 150" overflow="visible">
-              <defs>
-                <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stop-color="#d4bc87"/>
-                  <stop offset="50%"  stop-color="#bfa265"/>
-                  <stop offset="100%" stop-color="#9c7c38"/>
-                </linearGradient>
-              </defs>
-              <circle id="rl" cx="100" cy="75" r="52" stroke="url(#rg)" stroke-width="4.5" fill="none" filter="drop-shadow(0 0 8px rgba(163,128,59,0.5))"/>
-              <circle id="rr" cx="200" cy="75" r="52" stroke="url(#rg)" stroke-width="4.5" fill="none" filter="drop-shadow(0 0 8px rgba(163,128,59,0.5))"/>
-              <text x="100" y="80" class="rt">Franklin</text>
-              <text x="200" y="80" class="rt">Sarah</text>
-            </svg>
+          <div class="hero-name-block">
+            <div class="hero-groom-name fade3d" data-delay="0.1">Ebin</div>
+            <div class="hero-heart-slot" id="hero-heart-slot">
+              <div class="seal-body static-heart" style="opacity: 0; filter: drop-shadow(0 4px 10px rgba(185,26,56,0.35)); width: 50px; height: 45px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <svg class="seal-heart-bg" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;" viewBox="0 0 100 90">
+                  <path d="M50,15 C50,15 40,0 20,0 C8,0 0,10 0,23 C0,42.5 25,69 50,83 C75,69 100,42.5 100,23 C100,10 92,0 80,0 C60,0 50,15 50,15 Z" fill="url(#heartGrad)"></path>
+                  <path d="M50,19 C50,19 41.5,5 23.5,5 C12.7,5 5.5,13.5 5.5,24.5 C5.5,41 28,65 50,77.5 C72,65 94.5,41 94.5,24.5 C94.5,13.5 87.3,5 76.5,5 C58.5,5 50,19 50,19 Z" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-dasharray="3,3"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="hero-bride-name fade3d" data-delay="0.26">Alana</div>
           </div>
           <p class="h-scroll-hint fade3d" data-delay="0.34">✦ Scroll to explore ✦</p>
         </div>
       </div>
-      <div class="scroll-caret"><span></span><span></span></div>
     </section>
 
     <!-- ══ QUOTE STRIP ══ -->
     <section id="s-quote" class="strip-section dark-sec">
       <div class="strip-inner card3d">
-        <p class="strip-quote">"Once in a while, right in the middle of an ordinary life,<br>love gives us a fairy tale."</p>
-        <p class="strip-attr">— Franklin &amp; Sarah</p>
+        <p class="strip-quote">"Now these three remain: faith, hope and love.<br>But the greatest of these is love."</p>
+        <p class="strip-attr">— 1 Corinthians 13:13</p>
       </div>
     </section>
 
@@ -121,15 +127,15 @@
         <div class="scratch-wrap">
           <div class="scratch-beneath">
             <div class="sb-label">Save The Date</div>
-            <div class="sb-date">December 28</div>
+            <div class="sb-date">July 5</div>
             <div class="sb-year">2026</div>
-            <div class="sb-loc">Kerala, India</div>
+            <div class="sb-loc">Kolenchery, Kerala</div>
             <div class="sb-hearts">❤ ❤ ❤</div>
           </div>
           <canvas id="scratch-c"></canvas>
         </div>
         <p class="scratch-tip" id="scratch-tip">
-          <svg viewBox="0 0 24 24" width="14" height="14"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
           Scratch Here
         </p>
       </div>
@@ -167,80 +173,61 @@
       <div class="section-tag card3d">The Happy Couple</div>
       <h2 class="section-h card3d">He &amp; She</h2>
 
-      <div class="story-duo">
-        <!-- GROOM -->
-        <div class="story-person slide3d-left">
-          <div class="sp-photo-tilt">
-            <div class="sp-photo-inner">
-              <img src="images/Groom.jpg.jpeg" alt="Franklin" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="ph-fallback"><span>🤵</span><small>Franklin's Photo</small></div>
+      <div class="story-trio">
+        <!-- GROOM INFO (Left Side) -->
+        <div class="story-info-col groom-info slide3d-left">
+          <div class="sp-role">The Groom</div>
+          <h3 class="sp-name">Ebin Reji</h3>
+          <div class="sp-details-sec">
+            <div class="sp-detail-item">
+              <span class="sp-det-label">Family Name</span>
+              <span class="sp-det-val">Mangalath (H)</span>
             </div>
-            <div class="sp-photo-shadow"></div>
+            <div class="sp-detail-item">
+              <span class="sp-det-label">Location</span>
+              <span class="sp-det-val">Peringol, Kolenchery</span>
+            </div>
           </div>
-          <div class="sp-info">
-            <div class="sp-role">The Groom</div>
-            <h3 class="sp-name">Franklin Sabu</h3>
-            <div class="sp-details-sec">
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Profession</span>
-                <span class="sp-det-val">Physiotherapist</span>
-              </div>
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Education</span>
-                <span class="sp-det-val">Bachelors in Physiotherapy (BPT)</span>
-              </div>
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Location</span>
-                <span class="sp-det-val">Kothamangalam, Kerala</span>
-              </div>
-            </div>
-            <div class="sp-family-sec">
-              <h4 class="sp-fam-h">Family</h4>
-              <ul class="sp-fam-list">
-                <li><span class="fam-rel">Father</span><span class="fam-name">Sabu KK</span></li>
-                <li><span class="fam-rel">Mother</span><span class="fam-name">Meeghal Paul</span></li>
-                <li><span class="fam-rel">Brother</span><span class="fam-name">Festin Sabu</span></li>
-                <li><span class="fam-rel">Sister-in-law</span><span class="fam-name">Anisha Baby</span></li>
-                <li><span class="fam-rel">Niece</span><span class="fam-name">Nathania Festin</span></li>
-              </ul>
-            </div>
+          <div class="sp-family-sec">
+            <h4 class="sp-fam-h">Family</h4>
+            <ul class="sp-fam-list">
+              <li><span class="fam-rel">Father</span><span class="fam-name">Reji Peter</span></li>
+              <li><span class="fam-rel">Mother</span><span class="fam-name">Shiny Reji</span></li>
+            </ul>
           </div>
         </div>
 
-        <!-- BRIDE -->
-        <div class="story-person slide3d-right">
+        <!-- JOINT PHOTO (Center) -->
+        <div class="story-photo-col zoom3d">
           <div class="sp-photo-tilt">
             <div class="sp-photo-inner">
-              <img src="images/Bride.jpg.jpeg" alt="Sarah" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="ph-fallback"><span>👰</span><small>Sarah's Photo</small></div>
+              <img src="images/couple.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="ph-fallback"><span>👩‍❤️‍👨</span><small>Ebin &amp; Alana</small></div>
             </div>
             <div class="sp-photo-shadow"></div>
           </div>
-          <div class="sp-info">
-            <div class="sp-role">The Bride</div>
-            <h3 class="sp-name">Sarah Chandy</h3>
-            <div class="sp-details-sec">
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Profession</span>
-                <span class="sp-det-val">Business Administrator in Tusla (Public Sector)</span>
-              </div>
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Education</span>
-                <span class="sp-det-val">B.in International Hospitality Management &amp; MSc Human Resource Management (Candidate)</span>
-              </div>
-              <div class="sp-detail-item">
-                <span class="sp-det-label">Location</span>
-                <span class="sp-det-val">Dublin, Ireland</span>
-              </div>
+        </div>
+
+        <!-- BRIDE INFO (Right Side) -->
+        <div class="story-info-col bride-info slide3d-right">
+          <div class="sp-role">The Bride</div>
+          <h3 class="sp-name">Alana Kuriakose</h3>
+          <div class="sp-details-sec">
+            <div class="sp-detail-item">
+              <span class="sp-det-label">Family Name</span>
+              <span class="sp-det-val">Kizhakkaepillil (H)</span>
             </div>
-            <div class="sp-family-sec">
-              <h4 class="sp-fam-h">Family</h4>
-              <ul class="sp-fam-list">
-                <li><span class="fam-rel">Father</span><span class="fam-name">Mr. Reji Chandy</span></li>
-                <li><span class="fam-rel">Mother</span><span class="fam-name">Ms. Jincy Thomas</span></li>
-                <li><span class="fam-rel">Sister</span><span class="fam-name">Elizebeth Chandy</span></li>
-              </ul>
+            <div class="sp-detail-item">
+              <span class="sp-det-label">Location</span>
+              <span class="sp-det-val">Kadackanadu, Kolenchery</span>
             </div>
+          </div>
+          <div class="sp-family-sec">
+            <h4 class="sp-fam-h">Family</h4>
+            <ul class="sp-fam-list">
+              <li><span class="fam-rel">Father</span><span class="fam-name">Kuriakose</span></li>
+              <li><span class="fam-rel">Mother</span><span class="fam-name">Mary Kuriakose</span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -252,58 +239,58 @@
       <h2 class="section-h card3d">Gallery</h2>
       <div class="gal-masonry">
 
-        <div class="gal-item tilt3d" data-src="images/gallery-1.jpeg">
-          <img src="images/gallery-1.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-1.jpeg?v=2">
+          <img src="images/gallery-1.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-2.jpeg">
-          <img src="images/gallery-2.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-2.jpeg?v=2">
+          <img src="images/gallery-2.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-3.jpeg">
-          <img src="images/gallery-3.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-3.jpeg?v=2">
+          <img src="images/gallery-3.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-4.jpeg">
-          <img src="images/gallery-4.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-4.jpeg?v=2">
+          <img src="images/gallery-4.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-5.jpeg">
-          <img src="images/gallery-5.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-5.jpeg?v=2">
+          <img src="images/gallery-5.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-6.jpeg">
-          <img src="images/gallery-6.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-6.jpeg?v=2">
+          <img src="images/gallery-6.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-7.jpeg">
-          <img src="images/gallery-7.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-7.jpeg?v=2">
+          <img src="images/gallery-7.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-8.jpeg">
-          <img src="images/gallery-8.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-8.jpeg?v=2">
+          <img src="images/gallery-8.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-9.jpeg">
-          <img src="images/gallery-9.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-9.jpeg?v=2">
+          <img src="images/gallery-9.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-10.jpeg">
-          <img src="images/gallery-10.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-10.jpeg?v=2">
+          <img src="images/gallery-10.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
-        <div class="gal-item tilt3d" data-src="images/gallery-11.jpeg">
-          <img src="images/gallery-11.jpeg" alt="Franklin &amp; Sarah" loading="lazy">
+        <div class="gal-item tilt3d" data-src="images/gallery-11.jpeg?v=2">
+          <img src="images/gallery-11.jpeg?v=2" alt="Ebin &amp; Alana" loading="lazy">
           <div class="gi-overlay"></div>
         </div>
 
@@ -317,51 +304,27 @@
 
       <div class="ev-stack">
 
-        <!-- Groom's Wedding Eve -->
-        <div class="ev-card flip3d" data-delay="0">
-          <div class="ev-num">01</div>
-          <div class="ev-body">
-            <div class="ev-tag">Groom's Wedding Eve</div>
-            <h3 class="ev-title">Franklin's Wedding Eve</h3>
-            <p class="ev-date">📅 26th December 2026 · Evening</p>
-            <p class="ev-loc">📍 Groom's Home, Kothamangalam, Kerala</p>
-            <a href="https://www.google.com/maps?q=10.0281261,76.6043918&z=17&hl=en" target="_blank" rel="noopener" class="ev-btn">View on Maps ↗</a>
-          </div>
-        </div>
-
-        <!-- Bride's Wedding Eve -->
-        <div class="ev-card flip3d" data-delay="0.08">
-          <div class="ev-num">02</div>
-          <div class="ev-body">
-            <div class="ev-tag sangeet">Bride's Wedding Eve</div>
-            <h3 class="ev-title">Sarah's Wedding Eve</h3>
-            <p class="ev-date">📅 26th December 2026 · Evening</p>
-            <p class="ev-loc">📍 Nutmeg County, Kerala</p>
-            <a href="https://www.google.com/maps/dir/10.0892672,76.6476288/Nutmeg+County,+Vallamattam+Farms,+Pandappilly+P.O,+Muvattupuzha,+Kerala+686672/@9.9844996,76.5635935,13z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3b07dc9a95555555:0x8da7f37ee2c106af!2m2!1d76.6289867!2d9.9032513?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="ev-btn">View on Maps ↗</a>
-          </div>
-        </div>
-
         <!-- Holy Matrimony -->
-        <div class="ev-card flip3d" data-delay="0.16">
-          <div class="ev-num">03</div>
+        <div class="ev-card flip3d" data-delay="0.08">
+          <div class="ev-num">01</div>
           <div class="ev-body">
             <div class="ev-tag church">Holy Matrimony</div>
             <h3 class="ev-title">Wedding Ceremony</h3>
-            <p class="ev-date">📅 28th December 2026 · Afternoon</p>
-            <p class="ev-loc">⛪ St. Mary's Jacobite Syrian Cathedral, Karakkunnam</p>
-            <a href="https://www.google.com/maps/dir/10.0981785,76.642069/St.+Mary's+Jacobite+Syrian+Cathedral,+2J22%2BV3V,+Kochi+-+Madurai+-+Dhanushkodi+Rd,+Karakunnam,+Puthuppady,+Kerala+686673/@10.0015667,76.5996264,19z/data=!4m10!4m9!1m1!4e1!1m5!1m1!1s0x3b07e79c053eb755:0x872c13eb04a95d2b!2m2!1d76.6001659!2d10.0022306!3e0?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="ev-btn">Church Directions ↗</a>
+            <p class="ev-date">📅 Sunday, July 5th, 2026 · 2:00 PM</p>
+            <p class="ev-loc">⛪ St. Athanasious Jacobite Syrian Cathedral, Puthenkurish</p>
+            <a href="https://www.google.com/maps/search/St.+Athanasius+Cathedral+Puthencuriz" target="_blank" rel="noopener" class="ev-btn">Church Directions ↗</a>
           </div>
         </div>
 
         <!-- Grand Reception -->
-        <div class="ev-card flip3d" data-delay="0.24">
-          <div class="ev-num">04</div>
+        <div class="ev-card flip3d" data-delay="0.16">
+          <div class="ev-num">02</div>
           <div class="ev-body">
             <div class="ev-tag reception">Grand Reception</div>
             <h3 class="ev-title">Wedding Reception</h3>
-            <p class="ev-date">📅 28th December 2026 · Evening</p>
-            <p class="ev-loc">🏛️ C9 Event Center, Puthuppady<br>Muvattupuzha, Kerala 686673</p>
-            <a href="https://www.google.com/maps/dir//C9+Event+Center+(Unit+of+C9+Hospitality),+Puthuppady,+Muvattupuzha,+Kerala+686673/@10.0075197,76.6031885,17z" target="_blank" rel="noopener" class="ev-btn">Reception Directions ↗</a>
+            <p class="ev-date">📅 Sunday, July 5th, 2026 · 7:00 PM</p>
+            <p class="ev-loc">🏛️ THE ARC CONVENTION CENTER, Poothrikka</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Arc+Convention+Center+Poothrikka+Ernakulam" target="_blank" rel="noopener" class="ev-btn">Reception Directions ↗</a>
           </div>
         </div>
 
@@ -379,164 +342,25 @@
             <stop offset="100%" stop-color="#9c7c38"/>
           </linearGradient>
         </defs>
-        <circle id="url" cx="110" cy="80" r="58" stroke="url(#urg)" stroke-width="5" fill="none" filter="drop-shadow(0 0 12px rgba(163,128,59,0.6))"/>
-        <circle id="urr" cx="210" cy="80" r="58" stroke="url(#urg)" stroke-width="5" fill="none" filter="drop-shadow(0 0 12px rgba(163,128,59,0.6))"/>
-        <text x="110" y="86" class="urt">Franklin</text>
-        <text x="210" y="86" class="urt">Sarah</text>
+        <circle id="url" cx="110" cy="80" r="58" stroke="url(#urg)" stroke-width="5" fill="none" filter="drop-shadow(0 0 12px rgba(185,26,56,0.6))"/>
+        <circle id="urr" cx="210" cy="80" r="58" stroke="url(#urg)" stroke-width="5" fill="none" filter="drop-shadow(0 0 12px rgba(185,26,56,0.6))"/>
+        <text x="110" y="86" class="urt">Ebin</text>
+        <text x="210" y="86" class="urt">Alana</text>
       </svg>
       <div class="union-spark" id="union-spark"></div>
       <div class="union-msg" id="union-msg">
         <h2 class="um-head">Joined in Love &amp; Marriage</h2>
-        <p class="um-sub">Two hearts, two lives, two continents —<br>united by faith, friendship and forever.</p>
-        <div class="um-date">28 · December · 2026</div>
-        <div style="margin-top: 28px;" class="card3d">
-          <a href="https://youtu.be/T1wszRJszAs?si=GhKT45JPn7_XHITc" target="_blank" rel="noopener" class="ev-btn" style="background: linear-gradient(135deg, #ff334b, #d8142c); box-shadow: 0 6px 20px rgba(216, 20, 44, 0.35); border: none; display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-sans); font-size: 0.72rem; letter-spacing: 0.15em; font-weight: 600; padding: 12px 28px; text-transform: uppercase; text-decoration: none; border-radius: 50px; color: #fff; transition: transform 0.3s var(--ease-b), box-shadow 0.3s ease;">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="#fff" style="display: inline-block; vertical-align: middle;"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            OUR FIXATION CEREMONY on youtube
-          </a>
-        </div>
+        <p class="um-sub">Two hearts, two lives —<br>united by faith, friendship and forever.</p>
+        <div class="um-date">July 5, 2026</div>
       </div>
     </section>
 
-    <!-- ══ RSVP ══ -->
-    <section id="s-rsvp">
-      <div class="rsvp-inner">
-        <p class="rsvp-eyebrow card3d">Kindly Respond</p>
-        <h2 class="rsvp-title card3d">Grace Us With Your Presence</h2>
-        <p class="rsvp-sub card3d">Please let us know if you will be joining us to celebrate</p>
 
-        <form id="rsvp-form" novalidate>
-
-          <!-- Name -->
-          <div class="rsvp-field card3d">
-            <label class="rsvp-label" for="rsvp-name">Your Full Name</label>
-            <input class="rsvp-input" id="rsvp-name" type="text" placeholder="Enter your name" autocomplete="name" required>
-          </div>
-
-          <!-- Phone -->
-          <div class="rsvp-field card3d">
-            <label class="rsvp-label" for="rsvp-phone">Phone Number <span class="rsvp-opt">(optional)</span></label>
-            <input class="rsvp-input" id="rsvp-phone" type="tel" placeholder="+91 XXXXX XXXXX">
-          </div>
-
-          <!-- Attending? -->
-          <div class="rsvp-field card3d">
-            <label class="rsvp-label">Will You Be Attending?</label>
-            <div class="rsvp-attend-row">
-              <label class="rsvp-radio-lbl" id="attend-yes-lbl">
-                <input type="radio" name="attending" id="attend-yes" value="yes">
-                <span class="rsvp-radio-box">✓&ensp;Joyfully Accept</span>
-              </label>
-              <label class="rsvp-radio-lbl" id="attend-no-lbl">
-                <input type="radio" name="attending" id="attend-no" value="no">
-                <span class="rsvp-radio-box decline">✗&ensp;Regretfully Decline</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Events (shown when attending = yes) -->
-          <div class="rsvp-field rsvp-events-wrap card3d" id="rsvp-events-wrap">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <label class="rsvp-label" style="margin-bottom: 0;">Which Events Will You Attend?</label>
-              <button type="button" id="rsvp-select-all" style="background: none; border: none; font-family: var(--f-sans); font-size: 0.65rem; color: var(--pink); text-decoration: underline; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 4px;">Select All</button>
-            </div>
-            <div class="rsvp-events-grid">
-
-              <label class="rsvp-ev-chk">
-                <input type="checkbox" name="events" value="grooms-eve">
-                <span class="rsvp-ev-box">
-                  <span class="rsvp-ev-icon">🌙</span>
-                  <span class="rsvp-ev-text">
-                    <strong>Groom's Wedding Eve</strong>
-                    <small>26 Dec 2026 · Evening</small>
-                    <small>Groom's Home, Kothamangalam</small>
-                  </span>
-                </span>
-              </label>
-
-              <label class="rsvp-ev-chk">
-                <input type="checkbox" name="events" value="brides-eve">
-                <span class="rsvp-ev-box">
-                  <span class="rsvp-ev-icon">🌸</span>
-                  <span class="rsvp-ev-text">
-                    <strong>Bride's Wedding Eve</strong>
-                    <small>26 Dec 2026 · Evening</small>
-                    <small>Nutmeg County, Kerala</small>
-                  </span>
-                </span>
-              </label>
-
-
-              <label class="rsvp-ev-chk">
-                <input type="checkbox" name="events" value="church">
-                <span class="rsvp-ev-box">
-                  <span class="rsvp-ev-icon">⛪</span>
-                  <span class="rsvp-ev-text">
-                    <strong>Holy Matrimony</strong>
-                    <small>28 Dec 2026 · Afternoon</small>
-                    <small>St. Mary's Cathedral, Puthuppady</small>
-                  </span>
-                </span>
-              </label>
-
-              <label class="rsvp-ev-chk">
-                <input type="checkbox" name="events" value="reception">
-                <span class="rsvp-ev-box">
-                  <span class="rsvp-ev-icon">🥂</span>
-                  <span class="rsvp-ev-text">
-                    <strong>Grand Reception</strong>
-                    <small>28 Dec 2026 · Evening</small>
-                    <small>C9 Event Center, Muvattupuzha</small>
-                  </span>
-                </span>
-              </label>
-
-            </div>
-          </div>
-
-          <!-- Message -->
-          <div class="rsvp-field card3d">
-            <label class="rsvp-label" for="rsvp-msg">A Message for the Couple <span class="rsvp-opt">(optional)</span></label>
-            <textarea class="rsvp-input rsvp-textarea" id="rsvp-msg" placeholder="Share your wishes..." rows="3"></textarea>
-          </div>
-
-          <!-- Submit -->
-          <div class="rsvp-actions card3d">
-            <button type="submit" class="rsvp-save-btn" id="rsvp-submit">Save My RSVP 💌</button>
-          </div>
-
-          <!-- Error hint -->
-          <p class="rsvp-error" id="rsvp-error"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- ══ RSVP REJECT POPUP ══ -->
-    <div id="rsvp-popup" class="rsvp-popup-overlay" aria-modal="true" role="dialog">
-      <div class="rsvp-popup-box">
-        <div class="rsvp-popup-emoji">💔</div>
-        <h3 class="rsvp-popup-title">We Will Miss You Dearly</h3>
-        <p class="rsvp-popup-msg">Though you won't be with us in person, you will always be with us in our hearts. Thank you for letting us know, and we send you all our love.</p>
-        <p class="rsvp-popup-name" id="rsvp-popup-name"></p>
-        <button class="rsvp-popup-close" id="rsvp-popup-close">Close ✕</button>
-      </div>
-    </div>
-
-    <!-- ══ RSVP ACCEPT POPUP ══ -->
-    <div id="rsvp-accept-popup" class="rsvp-popup-overlay" aria-modal="true" role="dialog">
-      <div class="rsvp-popup-box accept">
-        <div class="rsvp-popup-emoji">🎉</div>
-        <h3 class="rsvp-popup-title">We Can't Wait to See You!</h3>
-        <p class="rsvp-popup-msg">Your RSVP has been saved. We are overjoyed that you will be joining us to celebrate this special day. See you on 28 December 2026!</p>
-        <p class="rsvp-popup-name" id="rsvp-accept-name"></p>
-        <button class="rsvp-popup-close" id="rsvp-accept-close">Wonderful! ✕</button>
-      </div>
-    </div>
 
     <!-- FOOTER -->
     <footer id="s-footer">
-      <div class="ft-script">Franklin &amp; Sarah</div>
-      <div class="ft-sub">With love · Kerala &amp; Dublin · 2026</div>
+      <div class="ft-script">Ebin &amp; Alana</div>
+      <div class="ft-sub">With love · Kerala · 2026</div>
       <div class="ft-line"></div>
       <div class="ft-copy">Made with ❤ by <a href="https://wa.me/919037352739" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='inherit'">Nexora Creations</a> · <a href="https://wa.me/919037352739" target="_blank" rel="noopener" style="color: var(--gold-ll); text-decoration: none; font-size: 0.58rem; letter-spacing: 0.05em; margin-left: 6px; border: 1px solid rgba(212,168,67,0.35); padding: 2px 8px; border-radius: 50px; display: inline-block; vertical-align: middle; transition: all 0.3s;" onmouseover="this.style.background='var(--gold)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--gold-ll)'">Meet the developer</a> · © 2026</div>
     </footer>
